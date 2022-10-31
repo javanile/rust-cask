@@ -5,6 +5,13 @@ description = "Docker-based application deployment tool for developer"
 license = "MIT"
 edition = "2021"
 
+[badges]
+travis-ci = { repository = "https://travis-ci.org/javanile/cask" }
+
+[[bin]]
+name = "cask"
+path = "src/main.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [build-dependencies]
 build-target = "0.4.0"
