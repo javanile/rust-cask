@@ -1,3 +1,6 @@
+use std::ffi::OsStr;
+use std::ffi::OsString;
+use std::path::PathBuf;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -8,6 +11,14 @@ pub struct Server {
 }
 
 impl Server {
+
+
+    pub fn exists(server_name: String) -> bool {
+        return true;
+    }
+
+
+
     pub fn auto_clone() {
 
         let f = std::fs::File::open("config.yml").expect("Could not open file.");

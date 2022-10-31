@@ -7,9 +7,8 @@ use serde::{Deserialize, Serialize};
 use serde_yaml::{self};
 
 use clap::{Args, Parser, Subcommand, ValueEnum};
+
 use crate::assets::server::Server;
-
-
 
 #[derive(Debug, Parser)]
 struct Cli {
@@ -32,7 +31,11 @@ fn main() {
 
    match args.command {
       Commands::CreateServer { server_name } => {
-         println!("Cloning {}", server_name);
+         if Server::exists(server_name.clone()) {
+            println!("Update {}", server_name);
+         } else {
+            println!("Creating {}", server_name);
+         }
 
          Server::auto_clone();
       }
