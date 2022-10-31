@@ -1,22 +1,40 @@
-use clap::Parser;
+mod assets;
 
-/// Simple program to greet a person
-#[derive(Parser, Debug)]
-#[command(author, version, about, long_about = None)]
-struct Args {
-   /// Name of the person to greet
-   #[arg(short, long)]
-   name: String,
+use std::ffi::OsStr;
+use std::ffi::OsString;
+use std::path::PathBuf;
+use serde::{Deserialize, Serialize};
+use serde_yaml::{self};
 
-   /// Number of times to greet
-   #[arg(short, long, default_value_t = 1)]
-   count: u8,
+use clap::{Args, Parser, Subcommand, ValueEnum};
+use crate::assets::server::Server;
+
+
+
+#[derive(Debug, Parser)]
+struct Cli {
+    #[command(subcommand)]
+    command: Commands,
+}
+
+#[derive(Debug, Subcommand)]
+enum Commands {
+   /// Create new server
+   #[command(name = "create:server")]
+   CreateServer {
+      /// The remote to clone
+      server_name: String,
+   }
 }
 
 fn main() {
-   let args = Args::parse();
+   let args = Cli::parse();
 
-   for _ in 0..args.count {
-       println!("Hello {}!", args.name)
+   match args.command {
+      Commands::CreateServer { server_name } => {
+         println!("Cloning {}", server_name);
+
+         Server::auto_clone();
+      }
    }
 }

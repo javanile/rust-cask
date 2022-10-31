@@ -76,3 +76,4 @@ If you believe you have found a security vulnerability in Cask, we encourage you
 ## Reference
 
 - <https://github.com/vercel/turbo/tree/main/shim>
+- <https://github.com/clap-rs/clap/blob/master/examples/git-derive.rs>
