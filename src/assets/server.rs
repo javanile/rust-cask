@@ -8,17 +8,13 @@ use std::path::PathBuf;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct ServerConfig {
-    update_frequency_sec: u32,
-    num_threads: u32,
-    data_sources: Vec<String>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
 pub struct Server {
-    update_frequency_sec: u32,
-    num_threads: u32,
-    data_sources: Vec<String>,
+    name: String,
+    repo: String,
+    workdir: String,
+    host: String,
+    port: String,
+    private_key: String
 }
 
 impl Server {
@@ -59,7 +55,7 @@ impl Server {
 
         let f = std::fs::File::open("config.yml").expect("Could not open file.");
         //let mut scrape_config: Config = serde_yaml::from_reader(f).expect("Could not read values.");
-        let mut scrape_config: ServerConfig = ServerConfig {
+        let mut scrape_config: Server = Server {
             update_frequency_sec: 1,
             num_threads: 1,
             data_sources: vec!["Ciao".to_string()],
