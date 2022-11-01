@@ -43,6 +43,8 @@ Turbo is an next-generation toolchain for frontend development, written in Rust.
 cargo install cask-cli
 ```
 
+> NOTE: Run this '$ xcode-select --install' on macOS
+
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
