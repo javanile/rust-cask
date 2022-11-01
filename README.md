@@ -45,6 +45,14 @@ cargo install cask-cli
 
 > NOTE: Run this '$ xcode-select --install' on macOS
 
+## Usage
+
+### Create server
+
+'''shell
+$ cask create:server SERVERNAME | sh
+'''
+
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
