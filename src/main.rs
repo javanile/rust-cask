@@ -35,6 +35,7 @@ fn main() {
             println!("Update {}", server_name);
          } else {
             println!("Creating {}", server_name);
+            Server::create_server_file(server_name.clone())
          }
 
          Server::auto_clone();

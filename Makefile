@@ -12,5 +12,9 @@ publish:
 ## Test
 ## ====
 
+test-help: build
+	@cargo run -- --help
+
 test-create-server: build
-	@cargo run create:server test1
+	@cargo run -- create:server test1
+	@cat $${HOME}/.cask/test1.yml

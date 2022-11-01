@@ -1,7 +1,18 @@
+
+extern crate dirs;
+
+use std::fs;
 use std::ffi::OsStr;
 use std::ffi::OsString;
 use std::path::PathBuf;
 use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ServerConfig {
+    update_frequency_sec: u32,
+    num_threads: u32,
+    data_sources: Vec<String>,
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Server {
@@ -12,18 +23,43 @@ pub struct Server {
 
 impl Server {
 
-
     pub fn exists(server_name: String) -> bool {
-        return true;
+        return false;
     }
 
+    pub fn create_server_file(server_name: String) {
+        let home_dir : String = dirs::home_dir().unwrap().into_os_string().into_string().unwrap();
+        let server_dir : String = format!("{}/{}", home_dir, ".cask");
+        let server_file : String = format!("{}/{}.{}", server_dir, server_name, "yml");
 
+        println!("FILE: {}", server_file);
+
+        fs::create_dir_all(server_dir).unwrap();
+
+        let mut server_config: Server = Server {
+            update_frequency_sec: 1,
+            num_threads: 1,
+            data_sources: vec!["Ciao".to_string()],
+        };
+
+        server_config.num_threads = 2;
+        server_config.data_sources.push("www.nytimes.com".to_string());
+        server_config.data_sources.push("news.yahoo.com".to_string());
+
+        let file_writer = std::fs::OpenOptions::new()
+            .write(true)
+            .create(true)
+            .open(server_file)
+            .expect("Couldn't open file");
+
+        serde_yaml::to_writer(file_writer, &server_config).unwrap();
+    }
 
     pub fn auto_clone() {
 
         let f = std::fs::File::open("config.yml").expect("Could not open file.");
         //let mut scrape_config: Config = serde_yaml::from_reader(f).expect("Could not read values.");
-        let mut scrape_config: Server = Server {
+        let mut scrape_config: ServerConfig = ServerConfig {
             update_frequency_sec: 1,
             num_threads: 1,
             data_sources: vec!["Ciao".to_string()],
@@ -43,12 +79,5 @@ impl Server {
             .open("new_config.yml")
             .expect("Couldn't open file");
         serde_yaml::to_writer(f, &scrape_config).unwrap();
-
-
-
-
-
-
-
     }
 }
