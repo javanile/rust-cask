@@ -79,3 +79,4 @@ If you believe you have found a security vulnerability in Cask, we encourage you
 
 - <https://github.com/vercel/turbo/tree/main/shim>
 - <https://github.com/clap-rs/clap/blob/master/examples/git-derive.rs>
+- <https://apple.stackexchange.com/questions/254380/why-am-i-getting-an-invalid-active-developer-path-when-attempting-to-use-git-a>
