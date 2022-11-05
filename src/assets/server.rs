@@ -11,10 +11,10 @@ use serde::{Deserialize, Serialize};
 pub struct Server {
     name: String,
     repo: String,
-    workdir: String,
-    host: String,
-    port: String,
-    private_key: String
+    //workdir: String,
+    //host: String,
+    //port: String,
+    //private_key: String
 }
 
 impl Server {
@@ -33,14 +33,14 @@ impl Server {
         fs::create_dir_all(server_dir).unwrap();
 
         let mut server_config: Server = Server {
-            update_frequency_sec: 1,
-            num_threads: 1,
-            data_sources: vec!["Ciao".to_string()],
+            name: "1".to_string(),
+            repo: "1".to_string(),
+            //data_sources: vec!["Ciao".to_string()],
         };
 
-        server_config.num_threads = 2;
-        server_config.data_sources.push("www.nytimes.com".to_string());
-        server_config.data_sources.push("news.yahoo.com".to_string());
+        //server_config.num_threads = 2;
+        //server_config.data_sources.push("www.nytimes.com".to_string());
+        //server_config.data_sources.push("news.yahoo.com".to_string());
 
         let file_writer = std::fs::OpenOptions::new()
             .write(true)
@@ -56,18 +56,20 @@ impl Server {
         let f = std::fs::File::open("config.yml").expect("Could not open file.");
         //let mut scrape_config: Config = serde_yaml::from_reader(f).expect("Could not read values.");
         let mut scrape_config: Server = Server {
-            update_frequency_sec: 1,
-            num_threads: 1,
-            data_sources: vec!["Ciao".to_string()],
+            name: "1".to_string(),
+            repo: "1".to_string(),
+            //update_frequency_sec: 1,
+            //num_threads: 1,
+            //data_sources: vec!["Ciao".to_string()],
         };
 
-        scrape_config.num_threads = 2;
-        scrape_config
-            .data_sources
-            .push("www.nytimes.com".to_string());
-        scrape_config
-            .data_sources
-            .push("news.yahoo.com".to_string());
+        scrape_config.name = "2".to_string();
+        //scrape_config
+//            .data_sources
+//            .push("www.nytimes.com".to_string());
+//        scrape_config
+//            .data_sources
+ //           .push("news.yahoo.com".to_string());
 
         let f = std::fs::OpenOptions::new()
             .write(true)

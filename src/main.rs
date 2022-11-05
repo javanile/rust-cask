@@ -1,4 +1,5 @@
 mod assets;
+mod commands;
 
 use std::ffi::OsStr;
 use std::ffi::OsString;
@@ -9,6 +10,7 @@ use serde_yaml::{self};
 use clap::{Args, Parser, Subcommand, ValueEnum};
 
 use crate::assets::server::Server;
+use crate::commands::{create_server, info};
 
 #[derive(Debug, Parser)]
 struct Cli {
@@ -19,9 +21,14 @@ struct Cli {
 #[derive(Debug, Subcommand)]
 enum Commands {
    /// Create new server
+   #[command(name = "info")]
+   Info {
+      server_name: String,
+   },
+
+   /// Create new server
    #[command(name = "create:server")]
    CreateServer {
-      /// The remote to clone
       server_name: String,
    }
 }
@@ -31,14 +38,11 @@ fn main() {
 
    match args.command {
       Commands::CreateServer { server_name } => {
-         if Server::exists(server_name.clone()) {
-            println!("Update {}", server_name);
-         } else {
-            println!("Creating {}", server_name);
-            Server::create_server_file(server_name.clone())
-         }
+         create_server::run(server_name)
+      }
 
-         Server::auto_clone();
+      Commands::Info { server_name } => {
+         info::run(server_name)
       }
    }
 }

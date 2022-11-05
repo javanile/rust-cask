@@ -18,3 +18,9 @@ test-help: build
 test-create-server: build
 	@cargo run -- create:server test1
 	@cat $${HOME}/.cask/test1.yml
+
+test-edit-server: build
+	@cargo run -- edit:server test1
+
+test-info: build
+	@cargo run -- info
