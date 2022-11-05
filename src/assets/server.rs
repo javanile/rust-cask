@@ -1,13 +1,14 @@
 
-extern crate dirs;
+    extern crate dirs;
 
-use std::fs;
+    use std::fs;
 //use std::ffi::OsStr;
 //use std::ffi::OsString;
 //use std::path::PathBuf;
 use serde::{Deserialize, Serialize};
+    use crate::assets;
 
-#[derive(Debug, Serialize, Deserialize)]
+    #[derive(Debug, Serialize, Deserialize)]
 pub struct Server {
     name: String,
     repo: String,
@@ -24,8 +25,7 @@ impl Server {
     }
 
     pub fn create_server_file(server_name: String) {
-        let home_dir : String = dirs::home_dir().unwrap().into_os_string().into_string().unwrap();
-        let server_dir : String = format!("{}/{}", home_dir, ".cask");
+        let server_dir : String = assets::local::dir();
         let server_file : String = format!("{}/{}.{}", server_dir, server_name, "yml");
 
         println!("FILE: {}", server_file);
