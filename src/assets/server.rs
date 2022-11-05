@@ -2,9 +2,9 @@
 extern crate dirs;
 
 use std::fs;
-use std::ffi::OsStr;
-use std::ffi::OsString;
-use std::path::PathBuf;
+//use std::ffi::OsStr;
+//use std::ffi::OsString;
+//use std::path::PathBuf;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -19,7 +19,7 @@ pub struct Server {
 
 impl Server {
 
-    pub fn exists(server_name: String) -> bool {
+    pub fn exists(_server_name: String) -> bool {
         return false;
     }
 
@@ -32,7 +32,7 @@ impl Server {
 
         fs::create_dir_all(server_dir).unwrap();
 
-        let mut server_config: Server = Server {
+        let /*mut*/ server_config: Server = Server {
             name: "1".to_string(),
             repo: "1".to_string(),
             //data_sources: vec!["Ciao".to_string()],
@@ -53,7 +53,7 @@ impl Server {
 
     pub fn auto_clone() {
 
-        let f = std::fs::File::open("config.yml").expect("Could not open file.");
+        let _f = std::fs::File::open("config.yml").expect("Could not open file.");
         //let mut scrape_config: Config = serde_yaml::from_reader(f).expect("Could not read values.");
         let mut scrape_config: Server = Server {
             name: "1".to_string(),
@@ -71,11 +71,11 @@ impl Server {
 //            .data_sources
  //           .push("news.yahoo.com".to_string());
 
-        let f = std::fs::OpenOptions::new()
+        let _f = std::fs::OpenOptions::new()
             .write(true)
             .create(true)
             .open("new_config.yml")
             .expect("Couldn't open file");
-        serde_yaml::to_writer(f, &scrape_config).unwrap();
+        serde_yaml::to_writer(_f, &scrape_config).unwrap();
     }
 }
