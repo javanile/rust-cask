@@ -11,7 +11,11 @@ mod commands;
 use clap::{/*Args,*/ Parser, Subcommand, /*ValueEnum*/};
 
 //use crate::assets::server::Server;
-use crate::commands::{create_server, info};
+use crate::commands::{
+   info,
+   create_server,
+   edit_server
+};
 
 #[derive(Debug, Parser)]
 struct Cli {
@@ -29,6 +33,12 @@ enum Commands {
    #[command(name = "create:server")]
    CreateServer {
       server_name: String,
+   },
+
+   /// Edit an existing server or create if not exists
+   #[command(name = "edit:server")]
+   EditServer {
+      server_name: String,
    }
 }
 
@@ -41,6 +51,9 @@ fn main() {
       }
       Commands::CreateServer { server_name } => {
          create_server::run(server_name)
+      }
+      Commands::EditServer { server_name } => {
+         edit_server::run(server_name)
       }
    }
 }

@@ -15,3 +15,7 @@ pub fn version() -> String {
 
     return version
 }
+
+pub fn default_exists() -> bool {
+    return true
+}

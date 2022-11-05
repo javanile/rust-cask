@@ -1,14 +1,15 @@
 
-    extern crate dirs;
+extern crate dirs;
 
-    use std::fs;
+use std::fs;
 //use std::ffi::OsStr;
 //use std::ffi::OsString;
 //use std::path::PathBuf;
 use serde::{Deserialize, Serialize};
-    use crate::assets;
+use crate::assets;
+use crate::assets::local;
 
-    #[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Server {
     name: String,
     repo: String,
@@ -25,8 +26,8 @@ impl Server {
     }
 
     pub fn create_server_file(server_name: String) {
-        let server_dir : String = assets::local::dir();
-        let server_file : String = format!("{}/{}.{}", server_dir, server_name, "yml");
+        let server_dir: String = local::dir();
+        let server_file: String = get_server_file(server_name);
 
         println!("FILE: {}", server_file);
 
@@ -78,4 +79,11 @@ impl Server {
             .expect("Couldn't open file");
         serde_yaml::to_writer(_f, &scrape_config).unwrap();
     }
+}
+
+pub fn get_server_file(server_name: String) -> String {
+    let server_dir : String = assets::local::dir();
+    let server_file : String = format!("{}/{}.{}", server_dir, server_name, "yml");
+
+    return server_file;
 }

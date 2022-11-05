@@ -31,3 +31,4 @@ serde = { version = "1.0.145", features = ["derive"] }
 serde_yaml = "0.9.13"
 #walkdir = "2"
 dirs = "4.0"
+run_script = "^0.10.0"
