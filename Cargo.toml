@@ -1,6 +1,6 @@
 [package]
 name = "cask-cli"
-version = "0.1.0"
+version = "0.2.0"
 description = "Docker-based application deployment tool for developer"
 license = "MIT"
 edition = "2021"
